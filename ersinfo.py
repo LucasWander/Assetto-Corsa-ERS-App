@@ -16,7 +16,7 @@ import ac
 import acsys
 import datetime
 
-APP_NAME = "Hybrid Info"
+APP_NAME = "ERS Info"
 l_lapcount = 0
 l_fuel = 0
 lapcount = 0
@@ -48,8 +48,6 @@ def ac_console(message):
     #Escreve no console do jogo
     ac.console(full_message)
 
-ac_console(str(a))
-ac_log(str(sys.path))
 
 
 def on_activation():
@@ -71,7 +69,7 @@ def acMain(ac_version):
 
     global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput
 
-    appWindow = ac.newApp("hybridinfo")
+    appWindow = ac.newApp(APP_NAME)
     ac.setSize(appWindow, 300,300)
 
     ac_log("Testando a função de log")
@@ -106,7 +104,7 @@ def acMain(ac_version):
     ac.setPosition(l_KersInput, 3, 270)
 
 
-    return "hybridinfo"
+    return "ERS Info"
 
 
 def acUpdate(deltaT):
