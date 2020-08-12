@@ -12,10 +12,6 @@ os.environ['PATH'] = os.environ['PATH'] + ";."
 
 from lib.sim_info import info
 
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'testando'))
-from teste import a
-
 import ac
 import acsys
 import datetime
