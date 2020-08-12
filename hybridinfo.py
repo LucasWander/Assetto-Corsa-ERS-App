@@ -20,43 +20,6 @@ import ac
 import acsys
 import datetime
 
-
-#### AC
-# TODO: Get RMP
-# TODO: Get TurboBoost
-# TODO: EngineBrake
-# TODO: getTrackName
-# TODO: getTrackConfiguration
-# TODO: getTrackLength
-# TODO: getCarName
-# TODO: getCarPowerControllerCount
-
-#### Shared memory
-## Static
-# TODO: maxTorque
-# TODO: maxPower
-# TODO: maxRpm
-# TODO: maxTurboBoost
-# TODO: hasERS
-# TODO: hasKERS
-# TODO: kersMaxJ
-# TODO: ersPowerControllerCount
-# TODO: ersMaxJ
-# TODO: rpms
-# TODO: kersCharge
-# TODO: kersInput
-# TODO: turboBoost
-# TODO: engineBrake
-# TODO: ersRecoveryLevel
-# TODO: ersPowerLevel
-# TODO: ersHeatCharging
-# TODO: ersIsCharging
-# TODO: kersCurrentKJ
-# TODO: brakeTemp
-# TODO: brakeBias
-## Graphic
-# TODO: distanceTraveled
-
 APP_NAME = "Hybrid Info"
 l_lapcount = 0
 l_fuel = 0
