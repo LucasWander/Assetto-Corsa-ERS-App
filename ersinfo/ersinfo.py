@@ -31,6 +31,7 @@ l_ERSCurrentKJ = 0
 l_ERSMaxJ = 0
 l_KersCharge = 0
 l_KersInput = 0
+l_SpeedMS = 0
 
 
 def prepare_log_string(message):
@@ -70,13 +71,18 @@ def on_desactivation():
 
 def acMain(ac_version):
 
-    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput
+    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS
 
     appWindow = ac.newApp(APP_NAME)
-    ac.setSize(appWindow, 300, 300)
+    ac.setSize(appWindow, 500, 500)
 
     ac_log("Testando a função de log")
     ac_console("Testando a função de console")
+
+
+
+    l_SpeedMS = ac.addLabel(appWindow, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
+    ac.setPosition(l_SpeedMS, 3, 300)
 
     l_lapcount = ac.addLabel(appWindow, "Laps: 0")
     ac.setPosition(l_lapcount, 3, 30)
@@ -124,7 +130,7 @@ def acUpdate(deltaT):
 
     # ac_console("Updading")
 
-    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput
+    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed
 
     laps = ac.getCarState(0, acsys.CS.LapCount)
 
@@ -151,6 +157,9 @@ def acUpdate(deltaT):
 
     ac.setText(l_KersInput, "Kers Input: {}".format(
         ac.getCarState(0, acsys.CS.KersInput)))
+
+
+    ac.setText(l_SpeedMS, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
 
     if laps > lapcount:
         lapcount = laps
