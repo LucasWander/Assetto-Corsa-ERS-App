@@ -12,8 +12,8 @@ os.environ['PATH'] = os.environ['PATH'] + ";."
 
 from lib.sim_info import info
 
-import ac
-import acsys
+import ac # pylint: disable=import-error
+import acsys # pylint: disable=import-error
 import datetime
 
 APP_NAME = "ERS Info"
