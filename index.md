@@ -1,8 +1,6 @@
 # Assetto Corsa ERS App
 
 > Energy Recovery System app for Assetto Corsa
->
-> [App site](https://lucaswander.github.io/Assetto-Corsa-ERS-App/)
 
 ![App screenshot](./pics/screenshot.jpg)
 
