@@ -33,6 +33,7 @@ l_KersCharge = 0
 l_KersInput = 0
 l_SpeedMS = 0
 b_ChangeUnit = 0
+l_BatteryCapacity = 0
 
 current_energy_unit = ["kJ","mJ","Wh","kWh"]
 energy_unit_counter = 0
@@ -103,7 +104,7 @@ def changeEnergyUnit(*args):
 
 def acMain(ac_version):
 
-    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, b_ChangeUnit, energy_unit_counter, current_energy_unit
+    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, b_ChangeUnit, energy_unit_counter, current_energy_unit, l_BatteryCapacity
 
     appWindow = ac.newApp(APP_NAME)
     ac.setSize(appWindow, 500, 500)
@@ -149,6 +150,9 @@ def acMain(ac_version):
     l_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {}%".format(
         ac.getCarState(0, acsys.CS.KersCharge)))
     ac.setPosition(l_KersCharge, 3, 240)
+
+    l_BatteryCapacity = ac.addLabel(appWindow, "Energy Storage capacity: {}{}".format(0,current_energy_unit[energy_unit_counter]))
+    ac.setPosition(l_BatteryCapacity,3,330)
 
     l_KersInput = ac.addLabel(appWindow, "Kers Input: {}".format(
         ac.getCarState(0, acsys.CS.KersInput)))
@@ -196,6 +200,13 @@ def acUpdate(deltaT):
 
 
     ac.setText(l_SpeedMS, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
+
+    x = (getErsCurrent() * 100)/(100 - (100*ac.getCarState(0, acsys.CS.KersCharge)))
+    ac.console(str(x))
+
+
+    if(x != 0):
+        ac.setText(l_BatteryCapacity, "Energy Storage capacity: {}{}".format(x,current_energy_unit[energy_unit_counter]))
 
     if laps > lapcount:
         lapcount = laps
