@@ -201,6 +201,7 @@ def acUpdate(deltaT):
 
     ac.setText(l_SpeedMS, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
 
+    # does not provide an accurate value, because of the assetto corsa physics
     x = (getErsCurrent() * 100)/(100 - (100*ac.getCarState(0, acsys.CS.KersCharge)))
     ac.console(str(x))
 
