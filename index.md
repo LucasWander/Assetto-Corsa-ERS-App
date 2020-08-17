@@ -2,7 +2,7 @@
 
 > Energy Recovery System app for Assetto Corsa
 
-![App screenshot](./pics/screenshot.jpg)
+![App screenshot](/pics/screenshot.jpg)
 
 <br>
 
