@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+# Assetto Corsa ERS App
 
-You can use the [editor on GitHub](https://github.com/LucasWander/Assetto-Corsa-ERS-App/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+> Energy Recovery System app for Assetto Corsa
+>
+> [App site](https://lucaswander.github.io/Assetto-Corsa-ERS-App/)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![App screenshot](./pics/screenshot.jpg)
 
-### Markdown
+<br>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+# Instalation
 
-```markdown
-Syntax highlighted code block
+1. Download the latest [release](https://github.com/LucasWander/Assetto-Corsa-ERS-App/releases).zip
+2. Extract the zip content
+3. Move the extracted folder to Assetto Corsa root folder. Example:
 
-# Header 1
-## Header 2
-### Header 3
+        C:\Program Files (x86)\Steam\steamapps\common\assettocorsa
+4. Enable the app on Assetto Corsa options
 
-- Bulleted
-- List
+<br>
 
-1. Numbered
-2. List
+# Docs and Resources
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LucasWander/Assetto-Corsa-ERS-App/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+- [Shared memory for python applications (sim_info.py) for ac >= v0.22](https://www.assettocorsa.net/forum/index.php?threads/shared-memory-for-python-applications-sim_info-py-for-ac-v0-22.11382/)
+- [Python Docs](https://www.assettocorsa.net/forum/index.php?threads/python-doc-update-25-05-2017.517/)
+- [Shared Memory Reference](https://www.assettocorsa.net/forum/index.php?threads/shared-memory-reference-25-05-2017.3352/)
+- [Programming Language - Apps - GUI Themes](https://www.assettocorsa.net/forum/index.php?forums/programming-language-apps-gui-themes.22/)
