@@ -32,6 +32,17 @@ l_ERSMaxJ = 0
 l_KersCharge = 0
 l_KersInput = 0
 l_SpeedMS = 0
+b_ChangeUnit = 0
+
+current_energy_unit = ["kJ","mJ","Wh","kWh"]
+energy_unit_counter = 0
+
+energy_units = {
+    "kJ": 1000,
+    "mJ": 1000000,
+    "Wh": 3600,
+    "kWh": 3600000
+}
 
 
 def prepare_log_string(message):
@@ -68,10 +79,31 @@ def on_desactivation():
 
     enabled = False
 
+def getErsCurrentJoules():
+    return ac.getCarState(0, acsys.CS.ERSCurrentKJ) * 1000
+
+def getErsCurrent():
+    global energy_units, current_energy_unit, energy_unit_counter
+
+    return getErsCurrentJoules() / energy_units[current_energy_unit[energy_unit_counter]]
+
+def getERSMax():
+     global energy_units, current_energy_unit, energy_unit_counter
+
+     return ac.getCarState(0, acsys.CS.ERSMaxJ) / energy_units[current_energy_unit[energy_unit_counter]]
+
+def changeEnergyUnit(*args):
+
+    global energy_unit_counter
+
+    if(energy_unit_counter == 3):
+        energy_unit_counter = 0
+    else:
+        energy_unit_counter += 1
 
 def acMain(ac_version):
 
-    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS
+    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, b_ChangeUnit, energy_unit_counter, current_energy_unit
 
     appWindow = ac.newApp(APP_NAME)
     ac.setSize(appWindow, 500, 500)
@@ -79,6 +111,10 @@ def acMain(ac_version):
     ac_log("Testando a função de log")
     ac_console("Testando a função de console")
 
+    b_ChangeUnit = ac.addButton(appWindow, "Change energy unit")
+    ac.setSize(b_ChangeUnit, 150, 30)
+    ac.setPosition(b_ChangeUnit, 300, 30)
+    ac.addOnClickedListener(b_ChangeUnit, changeEnergyUnit)
 
 
     l_SpeedMS = ac.addLabel(appWindow, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
@@ -102,15 +138,15 @@ def acMain(ac_version):
         ac.getCarState(0, acsys.CS.ERSHeatCharging)))
     ac.setPosition(l_ERSHeatCharging, 3, 150)
 
-    l_ERSCurrentKJ = ac.addLabel(appWindow, "ERS Current KJ: {}".format(
-        ac.getCarState(0, acsys.CS.ERSCurrentKJ)))
+    l_ERSCurrentKJ = ac.addLabel(appWindow, "ERS Current: {:03.3f}{}".format(
+        getErsCurrent(), current_energy_unit[energy_unit_counter]))
     ac.setPosition(l_ERSCurrentKJ, 3, 180)
 
-    l_ERSMaxJ = ac.addLabel(appWindow, "ERS Max J: {}".format(
-        ac.getCarState(0, acsys.CS.ERSMaxJ)))
+    l_ERSMaxJ = ac.addLabel(appWindow, "ERS Max: {:03.3f}{}".format(
+        getERSMax(), current_energy_unit[energy_unit_counter]))
     ac.setPosition(l_ERSMaxJ, 3, 210)
 
-    l_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {}".format(
+    l_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {}%".format(
         ac.getCarState(0, acsys.CS.KersCharge)))
     ac.setPosition(l_KersCharge, 3, 240)
 
@@ -130,7 +166,7 @@ def acUpdate(deltaT):
 
     # ac_console("Updading")
 
-    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed
+    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed, energy_unit_counter, current_energy_unit
 
     laps = ac.getCarState(0, acsys.CS.LapCount)
 
@@ -146,13 +182,13 @@ def acUpdate(deltaT):
     ac.setText(l_ERSHeatCharging, "ERS Heat Charging: {}".format(
         ac.getCarState(0, acsys.CS.ERSHeatCharging)))
 
-    ac.setText(l_ERSCurrentKJ, "ERS Current KJ: {}".format(
-        ac.getCarState(0, acsys.CS.ERSCurrentKJ)))
+    ac.setText(l_ERSCurrentKJ, "ERS Current: {:03.3f}{}".format(
+        getErsCurrent(), current_energy_unit[energy_unit_counter]))
 
-    ac.setText(l_ERSMaxJ, "ERS Max J: {}".format(
-        ac.getCarState(0, acsys.CS.ERSMaxJ)))
+    ac.setText(l_ERSMaxJ, "ERS Max: {:03.3f}{}".format(
+        getERSMax(), current_energy_unit[energy_unit_counter]))
 
-    ac.setText(l_KersCharge, "Kers Max Charge: {}".format(
+    ac.setText(l_KersCharge, "Kers Max Charge: {}%".format(
         ac.getCarState(0, acsys.CS.KersCharge)))
 
     ac.setText(l_KersInput, "Kers Input: {}".format(
