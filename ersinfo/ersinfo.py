@@ -64,20 +64,14 @@ def ac_console(message):
     ac.console(full_message)
 
 
-def on_activation():
+def on_activation(*args):
     global enabled
-    ac_console("Ativando app")
-    ac_log("ATIVANDO app")
-
     enabled = True
 
 
-def on_desactivation():
+def on_desactivation(*args):
 
     global enabled
-    ac_console("Desativando app")
-    ac_log("Desativando app")
-
     enabled = False
 
 def getErsCurrentJoules():
@@ -111,6 +105,9 @@ def acMain(ac_version):
 
     ac_log("Testando a função de log")
     ac_console("Testando a função de console")
+
+    ac.addOnAppActivatedListener(appWindow, on_activation)
+    ac.addOnAppDismissedListener(appWindow, on_desactivation)
 
     b_ChangeUnit = ac.addButton(appWindow, "Change energy unit")
     ac.setSize(b_ChangeUnit, 150, 30)
@@ -168,7 +165,6 @@ def acUpdate(deltaT):
     if(not enabled):
         return
 
-    # ac_console("Updading")
 
     global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed, energy_unit_counter, current_energy_unit
 
