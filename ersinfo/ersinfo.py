@@ -187,11 +187,6 @@ def onFormRender(deltaT):
     ac.glColor4f(0, 0, 255,0.5)
     ac.glQuad(400, 90-((100*usage)-100), 40, (100*usage))
 
-
-    global appWindow
-
-
-
 def acUpdate(deltaT):
 
     global enabled
@@ -200,7 +195,7 @@ def acUpdate(deltaT):
         return
 
 
-    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed, energy_unit_counter, current_energy_unit, appWindow
+    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, energy_unit_counter, current_energy_unit
 
 
     laps = ac.getCarState(0, acsys.CS.LapCount)
