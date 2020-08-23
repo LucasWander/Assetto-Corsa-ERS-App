@@ -34,6 +34,7 @@ l_KersInput = 0
 l_SpeedMS = 0
 b_ChangeUnit = 0
 l_BatteryCapacity = 0
+l_BarCharge = 0
 
 current_energy_unit = ["kJ","mJ","Wh","kWh"]
 energy_unit_counter = 0
@@ -98,10 +99,11 @@ def changeEnergyUnit(*args):
 
 def acMain(ac_version):
 
-    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, b_ChangeUnit, energy_unit_counter, current_energy_unit, l_BatteryCapacity
+    global l_lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, b_ChangeUnit, energy_unit_counter, current_energy_unit, l_BatteryCapacity, l_BarCharge
+
 
     appWindow = ac.newApp(APP_NAME)
-    ac.setSize(appWindow, 500, 500)
+    ac.setSize(appWindow, 600, 500)
 
     ac_log("Testando a função de log")
     ac_console("Testando a função de console")
@@ -155,7 +157,39 @@ def acMain(ac_version):
         ac.getCarState(0, acsys.CS.KersInput)))
     ac.setPosition(l_KersInput, 3, 270)
 
+    l_BarCharge = ac.addLabel(appWindow, "{}%".format(
+        ac.getCarState(0, acsys.CS.KersCharge)))
+
+    ac.setPosition(l_BarCharge, 341, 130)
+
+    ac.addRenderCallback(appWindow, onFormRender)
+
     return "ERS Info"
+
+def onFormRender(deltaT):
+
+    kersValue = ac.getCarState(0,acsys.CS.KersCharge)
+
+    usage = getErsCurrent()/getERSMax()
+
+
+    ac.glColor4f(255,255,255, 0.4)
+    ac.glQuad(300,90, 40, 100)
+
+    ac.glColor4f(0, 255, 0,0.5)
+    ac.glQuad(300, 90-((100*kersValue)-100), 40, (100*kersValue))
+
+    ac.glColor4f(255,255,255, 0.4)
+    ac.glQuad(400,90, 40, 100)
+
+
+
+    ac.glColor4f(0, 0, 255,0.5)
+    ac.glQuad(400, 90-((100*usage)-100), 40, (100*usage))
+
+
+    global appWindow
+
 
 
 def acUpdate(deltaT):
@@ -166,7 +200,8 @@ def acUpdate(deltaT):
         return
 
 
-    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed, energy_unit_counter, current_energy_unit
+    global l_lapcount, lapcount, l_fuel, l_ERSRecovery, l_ERSDelivery, l_ERSHeatCharging, l_ERSCurrentKJ, l_ERSMaxJ, l_KersCharge, l_KersInput, l_SpeedMS, l_DriveTrainSpeed, energy_unit_counter, current_energy_unit, appWindow
+
 
     laps = ac.getCarState(0, acsys.CS.LapCount)
 
@@ -190,6 +225,10 @@ def acUpdate(deltaT):
 
     ac.setText(l_KersCharge, "Kers Max Charge: {}%".format(
         ac.getCarState(0, acsys.CS.KersCharge)))
+
+
+    ac.setText(l_BarCharge, "{:.1f}%".format(
+        100*ac.getCarState(0, acsys.CS.KersCharge)))
 
     ac.setText(l_KersInput, "Kers Input: {}".format(
         ac.getCarState(0, acsys.CS.KersInput)))
