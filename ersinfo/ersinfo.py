@@ -54,7 +54,7 @@ def is_app_disabled():
 def update_label_fuel():
 
     global label_fuel
-    ac.setText(label_fuel, "Fuel: {}".format(fuel))
+    ac.setText(label_fuel, "Fuel: {}".format(info.physics.fuel))
 
 def update_label_laps():
     global label_lapcount, previous_lapcount
