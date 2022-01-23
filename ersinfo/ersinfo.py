@@ -64,7 +64,7 @@ def update_label_laps():
         ac.setText(label_lapcount, "Laps: {}".format(previous_lapcount))
 
 def update_label_ers_recovery():
-    global label_ERSRecovery,
+    global label_ERSRecovery
     ac.setText(label_ERSRecovery, "ERS Recovery: {}".format(ac.getCarState(0, acsys.CS.ERSRecovery)))
 
 def update_label_ers_delivery():
