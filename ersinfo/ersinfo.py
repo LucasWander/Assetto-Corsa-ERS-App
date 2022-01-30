@@ -18,9 +18,7 @@ from lib.sim_info import info
 
 
 APP_NAME = "ERS Info"
-label_lapcount = 0
 label_fuel = 0
-previous_lapcount = 0
 is_enabled = True
 
 
@@ -56,12 +54,6 @@ def update_label_fuel():
     global label_fuel
     ac.setText(label_fuel, "Fuel: {}".format(info.physics.fuel))
 
-def update_label_laps():
-    global label_lapcount, previous_lapcount
-    laps = ac.getCarState(0, acsys.CS.LapCount)
-    if laps > previous_lapcount:
-        previous_lapcount = laps
-        ac.setText(label_lapcount, "Laps: {}".format(previous_lapcount))
 
 def update_label_ers_recovery():
     global label_ERSRecovery
@@ -172,8 +164,6 @@ def acMain(ac_version):
     label_SpeedMS = ac.addLabel(appWindow, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
     ac.setPosition(label_SpeedMS, 3, 300)
 
-    label_lapcount = ac.addLabel(appWindow, "Laps: 0")
-    ac.setPosition(label_lapcount, 3, 30)
 
     label_fuel = ac.addLabel(appWindow, "Fuel: {}".format(info.physics.fuel))
     ac.setPosition(label_fuel, 3, 60)
@@ -243,7 +233,6 @@ def acUpdate(deltaT):
         return
 
     update_label_fuel()
-    update_label_laps()
     update_label_ers_recovery()
     update_label_ers_delivery()
     update_label_ers_heat_charging()
