@@ -31,7 +31,6 @@ label_KersCharge = 0
 label_KersInput = 0
 label_SpeedMS = 0
 button_ChangeUnit = 0
-label_BatteryCapacity = 0
 label_BarCharge = 0
 
 current_energy_unit = ["kJ","mJ","Wh","kWh"]
@@ -143,7 +142,7 @@ def changeEnergyUnit(*args):
 
 def acMain(ac_version):
 
-    global label_lapcount, label_fuel, label_ERSRecovery, label_ERSDelivery, label_ERSHeatCharging, label_ERSCurrentKJ, label_ERSMaxJ, label_KersCharge, label_KersInput, label_SpeedMS, button_ChangeUnit, energy_unit_counter, current_energy_unit, label_BatteryCapacity, label_BarCharge
+    global label_lapcount, label_fuel, label_ERSRecovery, label_ERSDelivery, label_ERSHeatCharging, label_ERSCurrentKJ, label_ERSMaxJ, label_KersCharge, label_KersInput, label_SpeedMS, button_ChangeUnit, energy_unit_counter, current_energy_unit, label_BarCharge
 
 
     appWindow = ac.newApp(APP_NAME)
@@ -192,8 +191,7 @@ def acMain(ac_version):
         ac.getCarState(0, acsys.CS.KersCharge)))
     ac.setPosition(label_KersCharge, 3, 240)
 
-    label_BatteryCapacity = ac.addLabel(appWindow, "Energy Storage capacity: {}{}".format(0,current_energy_unit[energy_unit_counter]))
-    ac.setPosition(label_BatteryCapacity,3,330)
+
 
     label_KersInput = ac.addLabel(appWindow, "Kers Input: {}".format(
         ac.getCarState(0, acsys.CS.KersInput)))
