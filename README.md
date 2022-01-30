@@ -31,4 +31,4 @@
 
 [x] - Remove laps label
 [x] - Remove energy storage capacity label
-[ ] - 3 decimal numbers
+[x] - Remove fuel label

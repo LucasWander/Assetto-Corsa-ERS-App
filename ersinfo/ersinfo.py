@@ -18,7 +18,6 @@ from lib.sim_info import info
 
 
 APP_NAME = "ERS Info"
-label_fuel = 0
 is_enabled = True
 
 
@@ -48,10 +47,6 @@ def is_app_disabled():
     global is_enabled
     return not is_enabled
 
-def update_label_fuel():
-
-    global label_fuel
-    ac.setText(label_fuel, "Fuel: {}".format(info.physics.fuel))
 
 
 def update_label_ers_recovery():
@@ -76,7 +71,7 @@ def update_label_ers_max_j():
 
 def update_label_kers_charge():
     global label_KersCharge
-    ac.setText(label_KersCharge, "Kers Max Charge: {}%".format(ac.getCarState(0, acsys.CS.KersCharge)))
+    ac.setText(label_KersCharge, "Kers Max Charge: {:.2f}%".format(ac.getCarState(0, acsys.CS.KersCharge)))
 
 def update_label_bar_charge():
     global label_BarCharge
@@ -84,11 +79,11 @@ def update_label_bar_charge():
 
 def update_label_kers_input():
     global label_KersInput
-    ac.setText(label_KersInput, "Kers Input: {}".format(ac.getCarState(0, acsys.CS.KersInput)))
+    ac.setText(label_KersInput, "Kers Input: {:.2f}".format(ac.getCarState(0, acsys.CS.KersInput)))
 
 def update_label_speed_ms():
     global label_SpeedMS
-    ac.setText(label_SpeedMS, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
+    ac.setText(label_SpeedMS, "Speed: {:.1f}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
 
 def prepare_log_string(message):
     return str(datetime.datetime.now()) + " @@@@ " + APP_NAME + " @@@@ " + message
@@ -142,7 +137,7 @@ def changeEnergyUnit(*args):
 
 def acMain(ac_version):
 
-    global label_lapcount, label_fuel, label_ERSRecovery, label_ERSDelivery, label_ERSHeatCharging, label_ERSCurrentKJ, label_ERSMaxJ, label_KersCharge, label_KersInput, label_SpeedMS, button_ChangeUnit, energy_unit_counter, current_energy_unit, label_BarCharge
+    global label_lapcount, label_ERSRecovery, label_ERSDelivery, label_ERSHeatCharging, label_ERSCurrentKJ, label_ERSMaxJ, label_KersCharge, label_KersInput, label_SpeedMS, button_ChangeUnit, energy_unit_counter, current_energy_unit, label_BarCharge
 
 
     appWindow = ac.newApp(APP_NAME)
@@ -160,12 +155,8 @@ def acMain(ac_version):
     ac.addOnClickedListener(button_ChangeUnit, changeEnergyUnit)
 
 
-    label_SpeedMS = ac.addLabel(appWindow, "Speed: {}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
+    label_SpeedMS = ac.addLabel(appWindow, "Speed: {:.1f}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
     ac.setPosition(label_SpeedMS, 3, 300)
-
-
-    label_fuel = ac.addLabel(appWindow, "Fuel: {}".format(info.physics.fuel))
-    ac.setPosition(label_fuel, 3, 60)
 
     label_ERSRecovery = ac.addLabel(appWindow, "ERS Recovery: {}".format(
         ac.getCarState(0, acsys.CS.ERSRecovery)))
@@ -187,7 +178,7 @@ def acMain(ac_version):
         getERSMax(), current_energy_unit[energy_unit_counter]))
     ac.setPosition(label_ERSMaxJ, 3, 210)
 
-    label_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {}%".format(
+    label_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {:.2f}%".format(
         ac.getCarState(0, acsys.CS.KersCharge)))
     ac.setPosition(label_KersCharge, 3, 240)
 
@@ -230,7 +221,6 @@ def acUpdate(deltaT):
     if(is_app_disabled()):
         return
 
-    update_label_fuel()
     update_label_ers_recovery()
     update_label_ers_delivery()
     update_label_ers_heat_charging()
