@@ -29,6 +29,6 @@
 
 # TODO
 
-[ ] - Remove laps label
-[ ] - Remove energy storage capacity label
+[x] - Remove laps label
+[x] - Remove energy storage capacity label
 [ ] - 3 decimal numbers
