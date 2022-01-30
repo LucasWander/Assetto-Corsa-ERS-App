@@ -25,3 +25,10 @@
 - [Python Docs](https://www.assettocorsa.net/forum/index.php?threads/python-doc-update-25-05-2017.517/)
 - [Shared Memory Reference](https://www.assettocorsa.net/forum/index.php?threads/shared-memory-reference-25-05-2017.3352/)
 - [Programming Language - Apps - GUI Themes](https://www.assettocorsa.net/forum/index.php?forums/programming-language-apps-gui-themes.22/)
+
+
+# TODO
+
+[ ] - Remove laps label
+[ ] - Remove energy storage capacity label
+[ ] - 3 decimal numbers
