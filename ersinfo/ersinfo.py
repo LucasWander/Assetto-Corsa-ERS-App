@@ -188,29 +188,29 @@ def acMain(ac_version):
         ac.getCarState(0, acsys.CS.KersInput)*100))
     ac.setPosition(label_KersInput, 3, 270)
 
-    label_BarCharge = ac.addLabel(appWindow, "{}%".format(
-        ac.getCarState(0, acsys.CS.KersCharge)))
+    # label_BarCharge = ac.addLabel(appWindow, "{}%".format(
+    #     ac.getCarState(0, acsys.CS.KersCharge)))
 
-    ac.setPosition(label_BarCharge, 341, 130)
+    # ac.setPosition(label_BarCharge, 341, 130)
 
-    ac.addRenderCallback(appWindow, onFormRender)
+   # ac.addRenderCallback(appWindow, onFormRender)
 
     return "ERS Info"
 
-def onFormRender(deltaT):
+#def onFormRender(deltaT):
 
-    kersValue = ac.getCarState(0,acsys.CS.KersCharge)
+    # kersValue = ac.getCarState(0,acsys.CS.KersCharge)
 
-    usage = getErsCurrent()/getERSMax()
+    # usage = getErsCurrent()/getERSMax()
 
-    ac.glColor4f(255,255,255, 0.4)
-    ac.glQuad(300,90, 40, 100)
-    ac.glColor4f(0, 255, 0,0.5)
-    ac.glQuad(300, 90-((100*kersValue)-100), 40, (100*kersValue))
-    ac.glColor4f(255,255,255, 0.4)
-    ac.glQuad(400,90, 40, 100)
-    ac.glColor4f(0, 0, 255,0.5)
-    ac.glQuad(400, 90-((100*usage)-100), 40, (100*usage))
+    # ac.glColor4f(255,255,255, 0.4)
+    # ac.glQuad(300,90, 40, 100)
+    # ac.glColor4f(0, 255, 0,0.5)
+    # ac.glQuad(300, 90-((100*kersValue)-100), 40, (100*kersValue))
+    # ac.glColor4f(255,255,255, 0.4)
+    # ac.glQuad(400,90, 40, 100)
+    # ac.glColor4f(0, 0, 255,0.5)
+    # ac.glQuad(400, 90-((100*usage)-100), 40, (100*usage))
 
 
 
@@ -227,7 +227,7 @@ def acUpdate(deltaT):
     update_label_ers_current_kj()
     update_label_ers_max_j()
     update_label_kers_charge()
-    update_label_bar_charge()
+    #update_label_bar_charge()
     update_label_kers_input()
     update_label_speed_ms()
 
