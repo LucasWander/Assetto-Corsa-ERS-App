@@ -17,6 +17,8 @@
         C:\Program Files (x86)\Steam\steamapps\common\assettocorsa
 4. Enable the app on Assetto Corsa options
 
+5. Enable the app on Assetto Corsa in game options
+
 <br>
 
 # Docs and Resources
