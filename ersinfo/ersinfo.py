@@ -51,27 +51,27 @@ def is_app_disabled():
 
 def update_label_ers_recovery():
     global label_ERSRecovery
-    ac.setText(label_ERSRecovery, "ERS Recovery: {}".format(ac.getCarState(0, acsys.CS.ERSRecovery)))
+    ac.setText(label_ERSRecovery, "MGU-K recovery mode: {}".format(ac.getCarState(0, acsys.CS.ERSRecovery)))
 
 def update_label_ers_delivery():
     global label_ERSDelivery
-    ac.setText(label_ERSDelivery, "ERS Delivery: {}".format(ac.getCarState(0, acsys.CS.ERSDelivery)))
+    ac.setText(label_ERSDelivery, "MGU-K deploy mode: {}".format(ac.getCarState(0, acsys.CS.ERSDelivery)))
 
 def update_label_ers_heat_charging():
     global label_ERSHeatCharging
-    ac.setText(label_ERSHeatCharging, "ERS Heat Charging: {}".format(ac.getCarState(0, acsys.CS.ERSHeatCharging)))
+    ac.setText(label_ERSHeatCharging, "MGU-H mode: {}".format(ac.getCarState(0, acsys.CS.ERSHeatCharging)))
 
 def update_label_ers_current_kj():
     global label_ERSCurrentKJ, energy_unit_counter, current_energy_unit
-    ac.setText(label_ERSCurrentKJ, "ERS Current: {:03.3f}{}".format(getErsCurrent(), current_energy_unit[energy_unit_counter]))
+    ac.setText(label_ERSCurrentKJ, "Energy consumed in this lap: {:03.3f}{}".format(getErsCurrent(), current_energy_unit[energy_unit_counter]))
 
 def update_label_ers_max_j():
     global label_ERSMaxJ, energy_unit_counter, current_energy_unit
-    ac.setText(label_ERSMaxJ, "ERS Max: {:03.3f}{}".format(getERSMax(), current_energy_unit[energy_unit_counter]))
+    ac.setText(label_ERSMaxJ, "Maximum energy allowed per lap: {:03.3f}{}".format(getERSMax(), current_energy_unit[energy_unit_counter]))
 
 def update_label_kers_charge():
     global label_KersCharge
-    ac.setText(label_KersCharge, "Kers Max Charge: {:.2f}%".format(ac.getCarState(0, acsys.CS.KersCharge)))
+    ac.setText(label_KersCharge, "Stored energy: {:.2f}%".format(ac.getCarState(0, acsys.CS.KersCharge)*100))
 
 def update_label_bar_charge():
     global label_BarCharge
@@ -79,7 +79,7 @@ def update_label_bar_charge():
 
 def update_label_kers_input():
     global label_KersInput
-    ac.setText(label_KersInput, "Kers Input: {:.2f}".format(ac.getCarState(0, acsys.CS.KersInput)))
+    ac.setText(label_KersInput, "MGU-K power level: {:.2f}".format(ac.getCarState(0, acsys.CS.KersInput)*100))
 
 def update_label_speed_ms():
     global label_SpeedMS
@@ -158,34 +158,34 @@ def acMain(ac_version):
     label_SpeedMS = ac.addLabel(appWindow, "Speed: {:.1f}m/s".format(ac.getCarState(0,acsys.CS.SpeedMS)))
     ac.setPosition(label_SpeedMS, 3, 300)
 
-    label_ERSRecovery = ac.addLabel(appWindow, "ERS Recovery: {}".format(
+    label_ERSRecovery = ac.addLabel(appWindow, "MGU-K recovery mode: {}".format(
         ac.getCarState(0, acsys.CS.ERSRecovery)))
     ac.setPosition(label_ERSRecovery, 3, 90)
 
-    label_ERSDelivery = ac.addLabel(appWindow, "ERS Delivery: {}".format(
+    label_ERSDelivery = ac.addLabel(appWindow, "MGU-K deploy mode: {}".format(
         ac.getCarState(0, acsys.CS.ERSDelivery)))
     ac.setPosition(label_ERSDelivery, 3, 120)
 
-    label_ERSHeatCharging = ac.addLabel(appWindow, "ERS Heat Charging: {}".format(
+    label_ERSHeatCharging = ac.addLabel(appWindow, "MGU-H mode: {}".format(
         ac.getCarState(0, acsys.CS.ERSHeatCharging)))
     ac.setPosition(label_ERSHeatCharging, 3, 150)
 
-    label_ERSCurrentKJ = ac.addLabel(appWindow, "ERS Current: {:03.3f}{}".format(
+    label_ERSCurrentKJ = ac.addLabel(appWindow, "Energy consumed in this lap: {:03.3f}{}".format(
         getErsCurrent(), current_energy_unit[energy_unit_counter]))
     ac.setPosition(label_ERSCurrentKJ, 3, 180)
 
-    label_ERSMaxJ = ac.addLabel(appWindow, "ERS Max: {:03.3f}{}".format(
+    label_ERSMaxJ = ac.addLabel(appWindow, "Maximum energy allowed per lap: {:03.3f}{}".format(
         getERSMax(), current_energy_unit[energy_unit_counter]))
     ac.setPosition(label_ERSMaxJ, 3, 210)
 
-    label_KersCharge = ac.addLabel(appWindow, "Kers Max Charge: {:.2f}%".format(
-        ac.getCarState(0, acsys.CS.KersCharge)))
+    label_KersCharge = ac.addLabel(appWindow, "Stored energy: {:.2f}%".format(
+        ac.getCarState(0, acsys.CS.KersCharge)*100))
     ac.setPosition(label_KersCharge, 3, 240)
 
 
 
-    label_KersInput = ac.addLabel(appWindow, "Kers Input: {}".format(
-        ac.getCarState(0, acsys.CS.KersInput)))
+    label_KersInput = ac.addLabel(appWindow, "MGU-K power level: {}".format(
+        ac.getCarState(0, acsys.CS.KersInput)*100))
     ac.setPosition(label_KersInput, 3, 270)
 
     label_BarCharge = ac.addLabel(appWindow, "{}%".format(
